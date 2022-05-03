@@ -3,10 +3,10 @@ package com.sparta.neonaduri_back.controller;
 /**
  * [controller] - userController
  *
- * @class   : userController
- * @author  : 오예령
- * @since   : 2022.04.30
- * @version : 1.0
+// * @class   : userController
+// * @author  : 오예령
+// * @since   : 2022.04.30
+// * @version : 1.0
  *
  *   수정일     수정자             수정내용
  *  --------   --------    ---------------------------
