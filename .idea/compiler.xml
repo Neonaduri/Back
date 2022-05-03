@@ -10,5 +10,6 @@
         <module name="neonaduri_backk.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="1.8" />
   </component>
 </project>
