@@ -63,7 +63,6 @@ public class UserService {
 
         String profileImgUrl=S3uploader.updateImage(multipartFile, "static", userId);
 
-
         User user=userRepository.findById(userId).orElseThrow(
                 ()->new IllegalArgumentException("회원 정보가 없습니다")
         );
