@@ -1,4 +1,5 @@
 package com.sparta.neonaduri_back.model;
+
 /**
  * [model] - User
  *
@@ -34,14 +35,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String nickName;
 
-    @Column(nullable = true)
-    private String email;
+//    @Column(nullable = true)
+//    private String email;
 
-    @Column(nullable = true)
-    private Long kakaoId;
+//    @Column(nullable = true)
+//    private Long kakaoId;
 
     @Column(nullable = true)
     private String profileImgUrl;
@@ -49,14 +50,22 @@ public class User {
     @Column(nullable = true)
     private int totalLike;
 
-    @Builder
-
     // 카카오 회원가입
-    public User(String userName, String password, String nickName, String email) {
+    public User(String userName, String nickName, String password, String profileImgUrl) {
         this.userName = userName;
-        this.password = password;
         this.nickName = nickName;
-        this.email = email;
+        this.password = password;
+        this.profileImgUrl = profileImgUrl;
+    }
+
+    // 구글 회원가입
+    @Builder
+    public User(String userName, String nickName, String password, String profileImgUrl, int totalLike) {
+        this.userName = userName;
+        this.nickName = nickName;
+        this.password = password;
+        this.profileImgUrl = profileImgUrl;
+        this.totalLike = totalLike;
     }
 
     // 회원가입
@@ -64,13 +73,13 @@ public class User {
         this.userName = userName;
         this.password = password;
         this.nickName = signupRequestDto.getNickName();
-        this.profileImgUrl = "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg";
+        this.profileImgUrl = "https://seunghodev-bucket.s3.ap-northeast-2.amazonaws.com/%EA%B0%9C%ED%97%88%ED%83%88.jpg";
     }
 
-    public User(String userName, String nickName, String passWordEncode, Long kakaoId) {
-        this.userName = userName;
-        this.nickName = nickName;
-        this.password = passWordEncode;
-        this.kakaoId = kakaoId;
+    //회원 프로필 업데이트
+    public void update(String profileImgUrl, String nickName){
+        this.profileImgUrl=profileImgUrl;
+        this.nickName=nickName;
     }
+
 }
