@@ -1,7 +1,7 @@
 package com.sparta.neonaduri_back.security.provider;
 
-import com.sparta.neonaduri_back.model.User;
-import com.sparta.neonaduri_back.repository.UserRepository;
+import com.sparta.neonaduri_back.login.model.User;
+import com.sparta.neonaduri_back.login.repository.UserRepository;
 import com.sparta.neonaduri_back.security.UserDetailsImpl;
 import com.sparta.neonaduri_back.security.jwt.JwtDecoder;
 import com.sparta.neonaduri_back.security.jwt.JwtPreProcessingToken;
@@ -31,6 +31,7 @@ public class JWTAuthProvider implements AuthenticationProvider {
         //  -> 해결을 위해서는 UserDetailsImpl 에 User 객체를 저장하지 않도록 수정
         //  ex) UserDetailsImpl 에 userId, userName, role 만 저장
         //    -> JWT 에 userId, userName, role 정보를 암호화/복호화하여 사용
+
         User user = userRepository.findByUserName(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("Can't find " + userName));
         UserDetailsImpl userDetails = new UserDetailsImpl(user);
