@@ -20,6 +20,7 @@ import com.sparta.neonaduri_back.security.UserDetailsImpl;
 
 import java.util.Date;
 
+// 4번 로그인 성공 시 JWT 토큰 생성
 public final class JwtTokenUtils {
 
     private static final int SEC = 1;

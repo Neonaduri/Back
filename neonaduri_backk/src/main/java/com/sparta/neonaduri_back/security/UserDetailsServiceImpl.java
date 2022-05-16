@@ -1,8 +1,8 @@
 package com.sparta.neonaduri_back.security;
 
 
-import com.sparta.neonaduri_back.model.User;
-import com.sparta.neonaduri_back.repository.UserRepository;
+import com.sparta.neonaduri_back.login.model.User;
+import com.sparta.neonaduri_back.login.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,9 +20,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+
         User user = userRepository.findByUserName(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("Can't find " + userName));
 
         return new UserDetailsImpl(user);
     }
+
 }

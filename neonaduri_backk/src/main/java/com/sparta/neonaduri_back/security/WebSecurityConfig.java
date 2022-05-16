@@ -76,7 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // h2-console 사용에 대한 허용 (CSRF, FrameOptions 무시)
         web
                 .ignoring()
-                .antMatchers("/h2-console/**");
+                .antMatchers("/h2-console/**")
+                .antMatchers("/");
 
     }
 
@@ -148,6 +149,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthFilter jwtFilter() throws Exception {
         List<String> skipPathList = new ArrayList<>();
         // Static 정보 접근 허용
+
         skipPathList.add("GET,/images/**");
         skipPathList.add("GET,/css/**");
 //        skipPathList.add("POST,/auth/**");
@@ -156,16 +158,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // h2-console 허용
         skipPathList.add("GET,/h2-console/**");
         skipPathList.add("POST,/h2-console/**");
+
         // 회원 관리 API 허용'
         skipPathList.add("GET,/user/kakao/callback/**");
         skipPathList.add("GET,/user/google/callback/**");
         skipPathList.add("POST,/user/signup");
-        skipPathList.add("POST,/api/idcheck");
+        skipPathList.add("POST,/idcheck");
         skipPathList.add("POST,/user/login");
-//        skipPathList.add("POST,/user/**");
 
         //게시글 관련 허용
-        skipPathList.add("GET,/api/posts");
 
         skipPathList.add("GET,/");
         skipPathList.add("GET,/basic.js");
@@ -195,8 +196,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //cors 해결
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-//        corsConfiguration.addAllowedOrigin("http://localhost:3000"); // local 테스트 시
-
+        corsConfiguration.addAllowedOrigin("http://localhost:3000"); // local 테스트 시
+//        corsConfiguration.addAllowedOrigin("http://neonaduri.com"); //배포시
         corsConfiguration.addAllowedOrigin("https://neonaduri.com"); //배포시
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.addAllowedHeader("*");

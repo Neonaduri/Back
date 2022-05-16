@@ -22,9 +22,11 @@ public class FilterSkipMatcher implements RequestMatcher {
                 .map(this :: httpPath)
                 .collect(Collectors.toList()));
         this.processingMatcher = new AntPathRequestMatcher(processingPath);
+
     }
 
     private AntPathRequestMatcher httpPath(String skipPath) {
+
         String[] splitStr = skipPath.split(",");
 
         /*

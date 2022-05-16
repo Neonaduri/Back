@@ -1,6 +1,5 @@
 package com.sparta.neonaduri_back.security;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.neonaduri_back.security.jwt.JwtTokenUtils;
 import org.springframework.security.core.Authentication;
@@ -9,9 +8,9 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
+// 3번 - 로그인 성공하면
 public class FormLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     public static final String AUTH_HEADER = "Authorization";
     public static final String TOKEN_TYPE = "BEARER";
@@ -20,8 +19,12 @@ public class FormLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
     public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
                                         final Authentication authentication) throws IOException {
         final UserDetailsImpl userDetails = ((UserDetailsImpl) authentication.getPrincipal());
+
+        // 4번 호출 - JWTUtils 로 이동!
         // Token 생성
         final String token = JwtTokenUtils.generateJwtToken(userDetails);
+
+        // 5번이 되면서 끝난다.
         response.addHeader(AUTH_HEADER, TOKEN_TYPE + " " + token);
 
         ObjectMapper objectMapper = new ObjectMapper();

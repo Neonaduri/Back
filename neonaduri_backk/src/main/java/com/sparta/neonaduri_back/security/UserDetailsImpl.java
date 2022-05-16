@@ -15,7 +15,7 @@ package com.sparta.neonaduri_back.security;
  */
 
 
-import com.sparta.neonaduri_back.model.User;
+import com.sparta.neonaduri_back.login.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
