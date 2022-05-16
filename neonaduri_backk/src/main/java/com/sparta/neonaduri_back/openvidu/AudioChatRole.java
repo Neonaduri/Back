@@ -1,4 +1,4 @@
-package com.sparta.neonaduri_back.dto.audio;
+package com.sparta.neonaduri_back.openvidu;
 
 
 

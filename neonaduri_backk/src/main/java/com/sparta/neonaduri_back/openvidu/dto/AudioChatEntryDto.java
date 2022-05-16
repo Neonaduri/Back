@@ -1,5 +1,6 @@
-package com.sparta.neonaduri_back.dto.audio;
+package com.sparta.neonaduri_back.openvidu.dto;
 
+import com.sparta.neonaduri_back.openvidu.AudioChatRole;
 import lombok.Data;
 
 @Data

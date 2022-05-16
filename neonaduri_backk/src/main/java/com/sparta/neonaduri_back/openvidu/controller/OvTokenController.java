@@ -1,10 +1,9 @@
-package com.sparta.neonaduri_back.controller;
+package com.sparta.neonaduri_back.openvidu.controller;
 
-import com.sparta.neonaduri_back.dto.audio.AudioChatEntryDto;
-import com.sparta.neonaduri_back.dto.audio.AudioChatLeaveDto;
-import com.sparta.neonaduri_back.dto.audio.AudioChatRole;
-import com.sparta.neonaduri_back.model.User;
-import com.sparta.neonaduri_back.repository.UserRepository;
+import com.sparta.neonaduri_back.openvidu.dto.AudioChatEntryDto;
+import com.sparta.neonaduri_back.openvidu.dto.AudioChatLeaveDto;
+import com.sparta.neonaduri_back.openvidu.AudioChatRole;
+import com.sparta.neonaduri_back.login.repository.UserRepository;
 import com.sparta.neonaduri_back.security.UserDetailsImpl;
 import io.openvidu.java.client.*;
 import lombok.extern.slf4j.Slf4j;
