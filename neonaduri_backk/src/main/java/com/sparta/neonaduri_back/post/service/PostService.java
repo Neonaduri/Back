@@ -146,10 +146,10 @@ public class PostService {
     }
 
     //BEST 4 게시물 조회
-    public List<BestAndLocationDto> showBestPosts(UserDetailsImpl userDetails) {
+    public List<PlanResponseDto> showBestPosts(UserDetailsImpl userDetails) {
 
         List<Post> postList=postRepository.findAllByIspublicTrueOrderByLikeCntDesc();
-        List<BestAndLocationDto> bestList=new ArrayList<>();
+        List<PlanResponseDto> bestList=new ArrayList<>();
 
         for(int i=0;i<postList.size();i++){
 
@@ -164,9 +164,9 @@ public class PostService {
             //게시물의 reviewCnt 계산
             int reviewCnt=reviewRepository.countByPostId(post.getPostId()).intValue();
 
-            BestAndLocationDto bestAndLocationDto =new BestAndLocationDto(post.getPostId(), post.getPostImgUrl(),post.getPostTitle(),
-                    post.getLocation(),post.getTheme(), post.isIslike(), post.getLikeCnt(), reviewCnt, post.getUser());
-            bestList.add(bestAndLocationDto);
+            PlanResponseDto planResponseDto =new PlanResponseDto(post.getPostId(), post.getPostImgUrl(),post.getPostTitle(),
+                    post.getStartDate(), post.getEndDate(), post.getLocation(),post.getTheme(), post.isIslike(), post.getLikeCnt(), reviewCnt, post.getUser());
+            bestList.add(planResponseDto);
         }
         return bestList;
     }
@@ -184,11 +184,11 @@ public class PostService {
     }
 
     //지역별 검색(8개 조회)
-    public Page<BestAndLocationDto> showLocationPosts(String location, int pageno, UserDetailsImpl userDetails) {
+    public Page<PlanResponseDto> showLocationPosts(String location, int pageno, UserDetailsImpl userDetails) {
 
         List<Post> locationPostList=postRepository.findAllByLocationOrderByLikeCntDesc(location);
 
-        List<BestAndLocationDto> locationList=new ArrayList<>();
+        List<PlanResponseDto> locationList=new ArrayList<>();
 
         Pageable pageable= getPageableList(pageno);
 
@@ -205,9 +205,9 @@ public class PostService {
             //게시물의 reviewCnt 계산
             int reviewCnt=reviewRepository.countByPostId(post.getPostId()).intValue();
 
-            BestAndLocationDto bestAndLocationDto =new BestAndLocationDto(post.getPostId(), post.getPostImgUrl(),post.getPostTitle(),
-                    post.getLocation(),post.getTheme(), post.isIslike(), post.getLikeCnt(), reviewCnt, post.getUser());
-            locationList.add(bestAndLocationDto);
+            PlanResponseDto planResponseDto =new PlanResponseDto(post.getPostId(), post.getPostImgUrl(),post.getPostTitle(),
+                    post.getStartDate(), post.getEndDate(), post.getLocation(),post.getTheme(), post.isIslike(), post.getLikeCnt(), reviewCnt, post.getUser());
+            locationList.add(planResponseDto);
         }
 
         int start=pageno*8;
@@ -230,11 +230,11 @@ public class PostService {
     }
 
     //테마별 검색조회(8개)
-    public Page<ThemeAndSearchDto> showThemePosts(String theme, int pageno, UserDetailsImpl userDetails) {
+    public Page<PlanResponseDto> showThemePosts(String theme, int pageno, UserDetailsImpl userDetails) {
 
         List<Post> themePostList=postRepository.findAllByThemeOrderByLikeCntDesc(theme);
 
-        List<ThemeAndSearchDto> themeList=new ArrayList<>();
+        List<PlanResponseDto> themeList=new ArrayList<>();
 
         Pageable pageable= getPageableList(pageno);
 
@@ -253,15 +253,15 @@ public class PostService {
             //게시물의 reviewCnt 계산
             int reviewCnt=reviewRepository.countByPostId(post.getPostId()).intValue();
 
-            ThemeAndSearchDto themeAndSearchDto =new ThemeAndSearchDto(post.getPostId(), post.getPostImgUrl(),post.getPostTitle(),
-                    post.getStartDate(), post.getEndDate(), post.getLocation(),post.isIslike(), post.getLikeCnt(), reviewCnt, post.getTheme(), post.getUser());
+            PlanResponseDto themeAndSearchDto =new PlanResponseDto(post.getPostId(), post.getPostImgUrl(),post.getPostTitle(),
+                    post.getStartDate(), post.getEndDate(), post.getLocation(),post.getTheme(), post.isIslike(), post.getLikeCnt(), reviewCnt, post.getUser());
             themeList.add(themeAndSearchDto);
         }
 
         int start=pageno*8;
         int end=Math.min((start+8), themeList.size());
 
-        return paging.overPageCheck2(themeList,start,end,pageable,pageno);
+        return paging.overPagesCheck(themeList,start,end,pageable,pageno);
     }
 
     //게시물 상세조회
@@ -270,6 +270,7 @@ public class PostService {
         Post post=postRepository.findById(postId).orElseThrow(
                 ()->new IllegalArgumentException("해당 게시물이 없습니다")
         );
+
         //전체공개이고
         if(post.isIspublic()){
 
@@ -282,7 +283,7 @@ public class PostService {
             );
         }else{
             //현재 유저가 작성자와 같으면
-            if(post.getUser().getId() == userDetails.getUser().getId()){
+            if(post.getUser().getId().equals(userDetails.getUser().getId())){
                 return postRepository.findById(postId).orElseThrow(
                         ()->new IllegalArgumentException("해당 게시물이 없습니다")
                 );
@@ -308,7 +309,7 @@ public class PostService {
     }
 
     //검색결과 조회
-    public Page<ThemeAndSearchDto> showSearchPosts(int pageno, String keyword, UserDetailsImpl userDetails) {
+    public Page<PlanResponseDto> showSearchPosts(int pageno, String keyword, UserDetailsImpl userDetails) {
         String postTitle=keyword;
         String location=keyword;
         String theme=keyword;
@@ -316,7 +317,7 @@ public class PostService {
         List<Post> postList=postRepository.findByPostTitleContainingOrLocationContainingOrThemeContainingOrderByModifiedAtDesc(
                 postTitle,location,theme
         );
-        List<ThemeAndSearchDto> searchList=new ArrayList<>();
+        List<PlanResponseDto> searchList=new ArrayList<>();
 
         Pageable pageable= getPageableList(pageno);
 
@@ -333,15 +334,15 @@ public class PostService {
             //게시물의 reviewCnt 계산
             int reviewCnt=reviewRepository.countByPostId(post.getPostId()).intValue();
 
-            ThemeAndSearchDto themeAndSearchDto =new ThemeAndSearchDto(post.getPostId(), post.getPostImgUrl(),post.getPostTitle(),
-                    post.getStartDate(), post.getEndDate(), post.getLocation(),post.isIslike(), post.getLikeCnt(), reviewCnt, post.getTheme(), post.getUser());
+            PlanResponseDto themeAndSearchDto =new PlanResponseDto(post.getPostId(), post.getPostImgUrl(),post.getPostTitle(),
+                    post.getStartDate(), post.getEndDate(), post.getLocation(),post.getTheme(), post.isIslike(), post.getLikeCnt(), reviewCnt, post.getUser());
             searchList.add(themeAndSearchDto);
         }
 
         int start=pageno*8;
         int end=Math.min((start+8), searchList.size());
 
-        return paging.overPageCheck2(searchList,start,end,pageable,pageno);
+        return paging.overPagesCheck(searchList,start,end,pageable,pageno);
     }
 
 
@@ -359,7 +360,7 @@ public class PostService {
     public Page<PostListDto> getMyPosts(int pageno, UserDetailsImpl userDetails) {
 
         // 유저가 작성한 글 조회
-        List<Post> posts = postRepository.findAllByUser(userDetails.getUser());
+        List<Post> posts = postRepository.findAllByUserOrderByModifiedAtDesc(userDetails.getUser());
 
         Pageable pageable = getPageableList5(pageno);
 

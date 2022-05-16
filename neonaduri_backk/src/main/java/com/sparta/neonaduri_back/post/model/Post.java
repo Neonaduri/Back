@@ -55,7 +55,7 @@ public class Post extends Timestamped {
     private boolean ispublic;
 
     @Column(nullable = true)
-    private Integer viewCnt;
+    private int viewCnt;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
