@@ -13,15 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class BestAndLocationPagingDto {
+public class PlanPagingDto {
 
-    private List<BestAndLocationDto> locationList=new ArrayList<>();
+    private List<PlanResponseDto> planList=new ArrayList<>();
     private int totalPage;
     private boolean islastPage;
 
-    public BestAndLocationPagingDto(Page<BestAndLocationDto> postDtoList, boolean islastPage) {
+    public PlanPagingDto(Page<PlanResponseDto> postDtoList, boolean islastPage) {
 
-        this.locationList= postDtoList.getContent();
+        this.planList= postDtoList.getContent();
         this.totalPage= postDtoList.getTotalPages();
         this.islastPage=islastPage;
     }

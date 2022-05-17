@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ThemeAndSearchDto {
+public class PlanResponseDto {
 
     private Long postId;
     private String postImgUrl;
@@ -18,9 +18,10 @@ public class ThemeAndSearchDto {
     private String startDate;
     private String endDate;
     private String location;
+    private String theme;
     private boolean islike;
     private int likeCnt;
     private int reviewCnt;
-    private String theme;
     private User user;
+
 }

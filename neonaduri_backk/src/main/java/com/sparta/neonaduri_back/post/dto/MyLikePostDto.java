@@ -12,7 +12,7 @@ import lombok.Setter;
 public class MyLikePostDto {
 
     private Long postId;
-    private String postImg;
+    private String postImgUrl;
     private String postTitle;
     private String location;
     private String startDate;

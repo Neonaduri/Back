@@ -13,16 +13,6 @@ public class PostResponseDto {
     private int totalPage;
     private boolean islastPage;
 
-//    public PostResponseDto(Post post) {
-//        this.postId = post.getPostId();
-//        this.startDate = post.getStartDate();
-//        this.endDate = post.getEndDate();
-//        this.dateCnt = post.getDateCnt();
-//        this.postTitle = post.getPostTitle();
-//        this.location = post.getLocation();
-//        this.theme = post.getTheme();
-//    }
-
     public PostResponseDto(Page<PostListDto> getMyPosts, boolean islastPage) {
         this.myplanList = getMyPosts.getContent();
         this.totalPage = getMyPosts.getTotalPages();

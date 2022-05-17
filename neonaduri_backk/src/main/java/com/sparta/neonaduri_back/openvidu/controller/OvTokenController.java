@@ -21,8 +21,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @RestController
 @RequestMapping("/auth/api/openvidu")
 
-@CrossOrigin(allowedHeaders = "*", exposedHeaders = {"*"},origins = {"https://localhost:3000","http://localhost:3000", 
-                                              "https://127.0.0.1:3000", "http://127.0.0.1:3000"},allowCredentials ="true")
+//@CrossOrigin(allowedHeaders = "*", exposedHeaders = {"*"},origins = {"https://localhost:3000","http://localhost:3000",
+//                                              "https://127.0.0.1:3000", "http://127.0.0.1:3000"},allowCredentials ="true")
 public class OvTokenController {
 
     private final UserRepository userRepository;
