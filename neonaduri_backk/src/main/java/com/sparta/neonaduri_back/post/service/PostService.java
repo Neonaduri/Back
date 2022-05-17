@@ -271,10 +271,12 @@ public class PostService {
                 ()->new IllegalArgumentException("해당 게시물이 없습니다")
         );
 
+        post.setIslike(userLikeTrueOrNot(userDetails.getUser().getId(), postId));
+
         //전체공개이고
         if(post.isIspublic()){
 
-//             게시글 조회 수 계산
+            // 게시글 조회 수 계산
             post.setViewCnt(post.getViewCnt()+1);
             postRepository.save(post);
 
@@ -282,7 +284,7 @@ public class PostService {
                     ()->new IllegalArgumentException("해당 게시물이 없습니다")
             );
         }else{
-            //현재 유저가 작성자와 같으면
+            // 현재 유저가 작성자와 같으면
             if(post.getUser().getId().equals(userDetails.getUser().getId())){
                 return postRepository.findById(postId).orElseThrow(
                         ()->new IllegalArgumentException("해당 게시물이 없습니다")

@@ -89,7 +89,7 @@ public class GoogleLoginService {
         body.add("client_secret", "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");  // 리액트
         body.add("code", code);
 //        body.add("redirect_uri", "http://localhost:3000/user/google/callback"); // 리액트
-        body.add("redirect_uri", "http://neonaduri.com/user/google/callback"); // 리액트
+        body.add("redirect_uri", "https://neonaduri.com/user/google/callback"); // 리액트
         body.add("grant_type", "authorization_code");
 
         // POST 요청 보내기

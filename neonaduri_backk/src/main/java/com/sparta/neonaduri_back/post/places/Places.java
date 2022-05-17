@@ -33,6 +33,9 @@ public class Places extends Timestamped {
     @Column(nullable = false)
     private String placeMemo;
 
+    @Column(nullable = true)
+    private int planTime;
+
     @Column(nullable = false)
     private String lat;
 
@@ -50,6 +53,7 @@ public class Places extends Timestamped {
         this.address=placeRequestDto.getAddress();
         this.roadAddress=placeRequestDto.getRoadAddress();
         this.placeMemo=placeRequestDto.getPlaceMemo();
+        this.planTime=placeRequestDto.getPlanTime();
         this.lat=placeRequestDto.getLat();
         this.lng=placeRequestDto.getLng();
     }
