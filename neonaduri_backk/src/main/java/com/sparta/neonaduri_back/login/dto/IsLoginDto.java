@@ -10,9 +10,7 @@ package com.sparta.neonaduri_back.login.dto;
  *
  *   수정일     수정자             수정내용
  *  --------   --------    ---------------------------
- *  2022.05.03 오예령       dto 안에 user 패키지 만들어서 관련 class 합쳐놓음
- *  2022.05.04 오예령       email 추가
- *  2022.05.07 오예령       email 제거
+
  */
 
 import lombok.Builder;

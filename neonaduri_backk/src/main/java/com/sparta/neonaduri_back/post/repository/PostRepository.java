@@ -31,6 +31,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     // 상세 조회, 계획 저장 전 삭제
     Optional<Post> findByPostId(Long postId);
-
-    List<Post> findAllByUser(User user);
 }

@@ -69,40 +69,40 @@ public class PostController {
 
     //인기 게시물 4개 조회
     @GetMapping("/plans/best")
-    public List<BestAndLocationDto> showBestPosts(@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public List<PlanResponseDto> showBestPosts(@AuthenticationPrincipal UserDetailsImpl userDetails){
 
         return postService.showBestPosts(userDetails);
     }
 
     //지역별 조회(8개)
     @GetMapping("/plans/location/{location}/{pageno}")
-    public BestAndLocationPagingDto showLocationPosts(@PathVariable("location") String location, @PathVariable("pageno") int pageno,
-                                                      @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public PlanPagingDto showLocationPosts(@PathVariable("location") String location, @PathVariable("pageno") int pageno,
+                                           @AuthenticationPrincipal UserDetailsImpl userDetails){
 
         //BestAndLocationDto
-        Page<BestAndLocationDto> postList=postService.showLocationPosts(location,pageno-1,userDetails);
+        Page<PlanResponseDto> postList=postService.showLocationPosts(location,pageno-1,userDetails);
 
         //islastPage
         boolean islastPage=false;
         if(postList.getTotalPages()==postList.getNumber()+1){
             islastPage=true;
         }
-        BestAndLocationPagingDto bestAndLocationPagingDto=new BestAndLocationPagingDto(postList,islastPage);
+        PlanPagingDto bestAndLocationPagingDto=new PlanPagingDto(postList,islastPage);
         return  bestAndLocationPagingDto;
     }
 
     //테마별 조회
     @GetMapping("/plans/theme/{theme}/{pageno}")
-    public ThemeAndSearchPagingDto showThemePosts(@PathVariable("theme") String theme, @PathVariable("pageno") int pageno,
+    public PlanPagingDto showThemePosts(@PathVariable("theme") String theme, @PathVariable("pageno") int pageno,
                                                   @AuthenticationPrincipal UserDetailsImpl userDetails){
-        Page<ThemeAndSearchDto> postList=postService.showThemePosts(theme,pageno-1,userDetails);
+        Page<PlanResponseDto> postList=postService.showThemePosts(theme,pageno-1,userDetails);
 
         //islastPage
         boolean islastPage=false;
         if(postList.getTotalPages()==postList.getNumber()+1){
             islastPage=true;
         }
-        ThemeAndSearchPagingDto themeAndSearchPagingDto=new ThemeAndSearchPagingDto(postList, islastPage);
+        PlanPagingDto themeAndSearchPagingDto=new PlanPagingDto(postList, islastPage);
         return themeAndSearchPagingDto;
     }
 
@@ -110,6 +110,9 @@ public class PostController {
     @GetMapping("/plans/detail/{postId}")
     public ResponseEntity<Object> showDetail(@PathVariable("postId") Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         Post post=postService.showDetail(postId, userDetails);
+
+        System.out.println("컨트롤러"+ post.getPostTitle());
+
         if(post==null){
             return ResponseEntity.status(200).body("비공개 게시물입니다");
         }
@@ -136,17 +139,17 @@ public class PostController {
 
     //검색 결과 조회
     @GetMapping("/plans/keyword/{keyword}/{pageno}")
-    public ThemeAndSearchPagingDto showSearchPosts(@PathVariable("pageno") int pageno, @PathVariable("keyword") String keyword,
+    public PlanPagingDto showSearchPosts(@PathVariable("pageno") int pageno, @PathVariable("keyword") String keyword,
                                                    @AuthenticationPrincipal UserDetailsImpl userDetails){
         System.out.println("키워드:"+keyword);
-        Page<ThemeAndSearchDto> postList=postService.showSearchPosts(pageno-1, keyword, userDetails);
+        Page<PlanResponseDto> postList=postService.showSearchPosts(pageno-1, keyword, userDetails);
 
         //islastPage
         boolean islastPage=false;
         if(postList.getTotalPages()==postList.getNumber()+1){
             islastPage=true;
         }
-        ThemeAndSearchPagingDto themeAndSearchPagingDto=new ThemeAndSearchPagingDto(postList, islastPage);
+        PlanPagingDto themeAndSearchPagingDto=new PlanPagingDto(postList, islastPage);
         return themeAndSearchPagingDto;
     }
 
