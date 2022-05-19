@@ -64,7 +64,7 @@ public class JwtAuthFilter extends AbstractAuthenticationProcessingFilter {
 //            response.sendRedirect("/user/login");
 //            return null;
         }
-        log.info("tokenPayload :"+tokenPayload);
+//        log.info("tokenPayload :"+tokenPayload);
 
         JwtPreProcessingToken jwtToken = new JwtPreProcessingToken(
                 extractor.extract(tokenPayload, request));

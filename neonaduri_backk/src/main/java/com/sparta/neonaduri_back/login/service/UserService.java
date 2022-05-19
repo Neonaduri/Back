@@ -23,6 +23,7 @@ import com.sparta.neonaduri_back.common.image.service.S3Uploader;
 import com.sparta.neonaduri_back.login.validator.UserInfoValidator;
 import com.sparta.neonaduri_back.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -31,7 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.IOException;
 
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -86,6 +87,7 @@ public class UserService {
             profileImgUrl = "https://seunghodev-bucket.s3.ap-northeast-2.amazonaws.com/default/Group+1.png";
             user.update(profileImgUrl, nickName);
             userRepository.save(user);
+            log.warn("기본이미지로 변경되었습니다.");
         }
         //수정 안했을 시(url은 존재하는 경우)
         else {
