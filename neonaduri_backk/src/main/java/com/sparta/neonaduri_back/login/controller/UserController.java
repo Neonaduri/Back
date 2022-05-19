@@ -15,17 +15,12 @@ package com.sparta.neonaduri_back.login.controller;
  */
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sparta.neonaduri_back.login.dto.DuplicateCheckDto;
-import com.sparta.neonaduri_back.login.dto.IsLoginDto;
-import com.sparta.neonaduri_back.login.dto.SignupRequestDto;
-import com.sparta.neonaduri_back.login.dto.SocialLoginInfoDto;
+import com.sparta.neonaduri_back.login.dto.*;
 import com.sparta.neonaduri_back.login.service.GoogleLoginService;
 import com.sparta.neonaduri_back.login.service.KakaoUserService;
 import com.sparta.neonaduri_back.login.service.UserService;
-import com.sparta.neonaduri_back.security.UserDetailsImpl;
-import com.sparta.neonaduri_back.utils.StatusEnum;
-import com.sparta.neonaduri_back.utils.StatusMessage;
 import com.sparta.neonaduri_back.login.validator.UserInfoValidator;
+import com.sparta.neonaduri_back.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -126,6 +121,13 @@ public class UserController {
         }
         return ResponseEntity.status(201).body("201");
     }
+
+    // 비밀번호 변경
+     @PutMapping("/updatePassword")
+     public ResponseEntity<Boolean> updatePassword(@RequestBody PasswordRequestDto passwordRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return ResponseEntity.ok(userService.updatePassword(passwordRequestDto, userDetails));}
+
+
 
 
 }
