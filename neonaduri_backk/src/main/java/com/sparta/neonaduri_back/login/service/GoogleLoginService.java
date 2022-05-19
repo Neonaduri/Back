@@ -226,7 +226,7 @@ public class GoogleLoginService {
 
         // userDetails 생성
         UserDetailsImpl userDetails = new UserDetailsImpl(findUser);
-        log.info("google 로그인 완료 : " + userDetails.getUser().getUserName());
+        log.warn("google 로그인 완료 : " + userDetails.getUser().getUserName());
         // UsernamePasswordAuthenticationToken 발급
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 userDetails,
