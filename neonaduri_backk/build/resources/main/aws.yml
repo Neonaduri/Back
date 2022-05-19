@@ -1,8 +1,8 @@
 cloud:
   aws:
     credentials:
-      accessKey: AKIAVWP6DUJ2OAZIIA4Y
-      secretKey: 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
+      accessKey: AKIAVWP6DUJ2LM4K7K7L
+      secretKey: 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
     s3:
       bucket: seunghodev-bucket
     region:
@@ -11,12 +11,12 @@ cloud:
       auto: false
 
 
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: 230381204395-ma19d0a9gn8putfail4k256v7pf16rug.apps.googleusercontent.com
-            client-secret: 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
-            scope: profile,email,openid
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: 922925499099-ae2nodkaoccn3rcd933u331j6bjnupum.apps.googleusercontent.com
+#            client-secret: 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
+#            scope: profile,email,openid

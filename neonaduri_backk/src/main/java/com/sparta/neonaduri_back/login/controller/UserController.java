@@ -66,8 +66,8 @@ public class UserController {
 
     // 구글 로그인
     @GetMapping("/user/google/callback")
-    public void googleLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
-        googleLoginService.googleLogin(code, response);
+    public SocialLoginInfoDto googleLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
+       return googleLoginService.googleLogin(code, response);
     }
 
      // 아이디 중복검사

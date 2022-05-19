@@ -68,13 +68,13 @@ public class PostController {
     }
 
     //인기 게시물 4개 조회
-    @GetMapping("/plans/best")
+    @GetMapping("/best")
     public List<PlanResponseDto> showBestPosts(@AuthenticationPrincipal UserDetailsImpl userDetails){
 
         return postService.showBestPosts(userDetails);
     }
 
-    //지역별 조회(8개)
+    //지역별 조회(5개)
     @GetMapping("/plans/location/{location}/{pageno}")
     public PlanPagingDto showLocationPosts(@PathVariable("location") String location, @PathVariable("pageno") int pageno,
                                            @AuthenticationPrincipal UserDetailsImpl userDetails){

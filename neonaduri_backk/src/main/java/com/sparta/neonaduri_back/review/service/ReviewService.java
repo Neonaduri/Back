@@ -76,7 +76,7 @@ public class ReviewService {
 
         for (Review review : reviews) {
 
-            ReviewListDto reviewListDto = new ReviewListDto(review.getId(), review.getUser().getNickName(), review.getReviewContents(),
+            ReviewListDto reviewListDto = new ReviewListDto(review.getId(), review.getUser().getNickName(), review.getUser().getProfileImgUrl(), review.getReviewContents(),
                     review.getReviewImgUrl(), review.getCreatedAt(), review.getModifiedAt());
 
             reviewList.add(reviewListDto);
@@ -142,12 +142,13 @@ public class ReviewService {
         );
 
         String nickName=review.getUser().getNickName();
+        String profileImgUrl=review.getUser().getProfileImgUrl();
         String reviewContents=review.getReviewContents();
         String reviewImgUrl=review.getReviewImgUrl();
         LocalDateTime createdAt=review.getCreatedAt();
         LocalDateTime modifiedAt=review.getModifiedAt();
 
-        ReviewListDto reviewListDto=new ReviewListDto(reviewId, nickName,reviewContents,
+        ReviewListDto reviewListDto=new ReviewListDto(reviewId, nickName, profileImgUrl,reviewContents,
                 reviewImgUrl,createdAt,modifiedAt);
         return reviewListDto;
     }

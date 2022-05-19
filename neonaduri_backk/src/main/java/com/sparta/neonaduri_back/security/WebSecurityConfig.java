@@ -173,6 +173,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         skipPathList.add("GET,/favicon.ico");
 
+        // 비회원도 계획 참여가능하도록
+        skipPathList.add("GET,/plans/*");
+
         FilterSkipMatcher matcher = new FilterSkipMatcher(
                 skipPathList,
                 "/**"
