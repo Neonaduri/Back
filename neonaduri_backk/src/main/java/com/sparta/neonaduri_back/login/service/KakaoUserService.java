@@ -135,14 +135,15 @@ public class KakaoUserService {
         String provider = "kakao";
         String kakaouserName = provider + "_" + jsonNode.get("id").asText(); // 로그인 아이디
 
-        String userName = String.valueOf(jsonNode.get("kakao_account").get("email"));
+        String userName = jsonNode.get("kakao_account").get("email").asText();
+
         System.out.println("카카오 서비스에서 로그인할 때 받는 email" + userName);
 
         String nickName = jsonNode.get("properties")
                 .get("nickname").asText();
         System.out.println("카카오 서비스에서 로그인할 때 받는 닉네임" + nickName);
 
-        String profileImgUrl = String.valueOf(jsonNode.get("kakao_account").get("profile").get("profile_image_url"));
+        String profileImgUrl = jsonNode.get("kakao_account").get("profile").get("profile_image_url").asText();
 
         System.out.println("카카오 토큰에 있는" + "" + kakaouserName + ""+ userName + "" + nickName +  "" + profileImgUrl);
 
@@ -164,21 +165,21 @@ public class KakaoUserService {
 
             String nickName = kakaoUserInfo.getNickName();
 
-            Optional<User> nickNameCheck = userRepository.findByNickName(nickName);
-
-            // 닉네임 중복 검사
-            if (nickNameCheck.isPresent()) {
-                String tempNickName = nickName;
-                int i = 1;
-                while (true){
-                    nickName = tempNickName + "_" + i;
-                    Optional<User> nickNameCheck2 = userRepository.findByNickName(nickName);
-                    if (!nickNameCheck2.isPresent()) {
-                        break;
-                    }
-                    i++;
-                }
-            }
+//            Optional<User> nickNameCheck = userRepository.findByNickName(nickName);
+//
+//            // 닉네임 중복 검사
+//            if (nickNameCheck.isPresent()) {
+//                String tempNickName = nickName;
+//                int i = 1;
+//                while (true){
+//                    nickName = tempNickName + "_" + i;
+//                    Optional<User> nickNameCheck2 = userRepository.findByNickName(nickName);
+//                    if (!nickNameCheck2.isPresent()) {
+//                        break;
+//                    }
+//                    i++;
+//                }
+//            }
             System.out.println("카카오 서비스에서 회원가입할 때 받는 닉네임" + nickName);
 
             // password: random UUID

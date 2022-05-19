@@ -10,7 +10,6 @@ package com.sparta.neonaduri_back.login.dto;
  *
  *   수정일     수정자             수정내용
  *  --------   --------    ---------------------------
-
  */
 
 import lombok.Builder;

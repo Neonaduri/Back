@@ -24,18 +24,9 @@ public class SocialLoginInfoDto {
     private String userName;
     private String nickName;
     private String profileImgUrl;
-    private String email;
-    private int totalLike;
+//    private String email;
 
-    // 카카오 로그인
-    public SocialLoginInfoDto(String userName, String nickName, String profileImgUrl, int totalLike) {
-        this.userName = userName;
-        this.nickName = nickName;
-        this.profileImgUrl = profileImgUrl;
-        this.totalLike = totalLike;
-    }
-
-    // 구글 소셜 로그인
+    // 카카오, 구글 소셜 로그인
     public SocialLoginInfoDto(String userName, String nickName, String profileImgUrl) {
         this.userName = userName;
         this.nickName = nickName;

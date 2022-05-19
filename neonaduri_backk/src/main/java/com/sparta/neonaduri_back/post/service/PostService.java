@@ -183,14 +183,14 @@ public class PostService {
         }
     }
 
-    //지역별 검색(8개 조회)
+    //지역별 검색(5개 조회)
     public Page<PlanResponseDto> showLocationPosts(String location, int pageno, UserDetailsImpl userDetails) {
 
         List<Post> locationPostList=postRepository.findAllByLocationOrderByLikeCntDesc(location);
 
         List<PlanResponseDto> locationList=new ArrayList<>();
 
-        Pageable pageable= getPageableList(pageno);
+        Pageable pageable= getPageableList5(pageno);
 
 
         for(int i=0;i<locationPostList.size();i++){
@@ -210,8 +210,8 @@ public class PostService {
             locationList.add(planResponseDto);
         }
 
-        int start=pageno*8;
-        int end=Math.min((start+8), locationList.size());
+        int start=pageno*5;
+        int end=Math.min((start+5), locationList.size());
 
         return paging.overPagesCheck(locationList,start,end,pageable,pageno);
     }
