@@ -57,6 +57,9 @@ dependencies {
 
     // openvidu
     implementation 'io.openvidu:openvidu-java-client:2.21.1'
+
+    //유효성 검사를 위한 validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
