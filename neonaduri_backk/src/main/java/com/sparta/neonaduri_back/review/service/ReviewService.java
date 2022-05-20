@@ -122,7 +122,6 @@ public class ReviewService {
     @Transactional
     public void updateReviewWithFile(Long reviewId, MultipartFile multipartFile, String reviewContents,UserDetailsImpl userDetails) throws IOException {
 
-        System.out.println("서비스단내용"+reviewContents);
         Review review=reviewRepository.findById(reviewId).orElseThrow(
                 ()->new IllegalArgumentException("해당 리뷰가 없습니다")
         );

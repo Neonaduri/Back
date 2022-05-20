@@ -15,11 +15,11 @@ import java.util.List;
 @Getter
 public class PlanPagingDto {
 
-    private List<PlanResponseDto> planList=new ArrayList<>();
+    private List<?> planList=new ArrayList<>();
     private int totalPage;
     private boolean islastPage;
 
-    public PlanPagingDto(Page<PlanResponseDto> postDtoList, boolean islastPage) {
+    public PlanPagingDto(Page<?> postDtoList, boolean islastPage) {
 
         this.planList= postDtoList.getContent();
         this.totalPage= postDtoList.getTotalPages();

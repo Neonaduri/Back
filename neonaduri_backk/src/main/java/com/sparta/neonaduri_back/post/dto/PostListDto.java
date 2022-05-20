@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 public class PostListDto {
     private Long postId;
     private String postImgUrl;
+    private String postTitle;
     private String startDate;
     private String endDate;
-    private String postTitle;
     private String location;
     private String theme;
     private boolean islike;
