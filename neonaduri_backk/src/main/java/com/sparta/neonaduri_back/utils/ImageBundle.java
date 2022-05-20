@@ -86,7 +86,7 @@ public class ImageBundle {
         searchImage.add("https://seunghodev-bucket.s3.ap-northeast-2.amazonaws.com/search/%EB%AA%A8%EC%9D%8C7.jpg");
         searchImage.add("https://seunghodev-bucket.s3.ap-northeast-2.amazonaws.com/search/%EB%AA%A8%EC%9D%8C8.jpg");
         searchImage.add("https://seunghodev-bucket.s3.ap-northeast-2.amazonaws.com/search/%EB%AA%A8%EC%9D%8C9.jpg");
-        System.out.println("이미지 갯수:"+searchImage.size());
+
         //Math.random -> 0<= x < 1 /size가 6인 배열을 곱하면 ->0<= x <6 -> 0,1,2,3,4,5
         double randInt=Math.random();
         int searchIndex=(int)(randInt*searchImage.size());

@@ -82,7 +82,6 @@ public class ReviewController {
         if(multipartFile.isEmpty()){
             reviewService.updateReview(reviewId,reviewImgUrl,reviewContents,userDetails);
         }else{
-            System.out.println(reviewContents);
             reviewService.updateReviewWithFile(reviewId, multipartFile, reviewContents, userDetails);
         }
         return ResponseEntity.status(201).body("201");

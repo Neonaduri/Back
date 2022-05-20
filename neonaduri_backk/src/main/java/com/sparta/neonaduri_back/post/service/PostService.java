@@ -64,7 +64,7 @@ public class PostService {
         for(int i=0; i<dayRequestDtoList.size();i++){
             //n일차 구하기
             int dateNumber=i+1;
-            System.out.println("일차"+dateNumber);
+
             List<PlaceRequestDto> placeRequestDtoList=dayRequestDtoList.get(i).getPlaces();
             List<Places> placesList=new ArrayList<>();
             //n일차에 대한 n개의 방문 장소 Places entity에 저장
@@ -89,7 +89,7 @@ public class PostService {
     }
 
     //내가 찜한 게시물 조회
-    public Page<MyLikePostDto> showMyLike(int pageno, UserDetailsImpl userDetails) {
+    public Page<?> showMyLike(int pageno, UserDetailsImpl userDetails) {
 
         //찜한 게시물 리스트
         List<MyLikePostDto> postList=new ArrayList<>();
@@ -184,7 +184,7 @@ public class PostService {
     }
 
     //지역별 검색(5개 조회)
-    public Page<PlanResponseDto> showLocationPosts(String location, int pageno, UserDetailsImpl userDetails) {
+    public Page<?> showLocationPosts(String location, int pageno, UserDetailsImpl userDetails) {
 
         List<Post> locationPostList=postRepository.findAllByLocationOrderByLikeCntDesc(location);
 
@@ -213,8 +213,9 @@ public class PostService {
         int start=pageno*5;
         int end=Math.min((start+5), locationList.size());
 
-        return paging.overPagesCheck(locationList,start,end,pageable,pageno);
+        return paging.overPages(locationList,start,end,pageable,pageno);
     }
+
     //bestList, locationList 페이징
     private Pageable getPageableList(int pageno) {
         Sort.Direction direction = Sort.Direction.DESC;
@@ -377,7 +378,7 @@ public class PostService {
 
             if(post.getDays().size()==0) continue;
             PostListDto postListDto = new PostListDto(post.getPostId(), post.getPostImgUrl(),
-                    post.getStartDate(), post.getEndDate(), post.getPostTitle(),
+                    post.getPostTitle(), post.getStartDate(), post.getEndDate(),
                     post.getLocation(), post.getTheme(),post.isIslike(), post.isIspublic(),
                     post.getLikeCnt(), reviewCnt);
             myplanList.add(postListDto);

@@ -10,9 +10,6 @@ package com.sparta.neonaduri_back.login.service;
  *
  *   수정일     수정자             수정내용
  *  --------   --------    ---------------------------
- *  2022.05.04 오예령       카카오 로그인 연결 성공
- *                         카카오 회원가입 시 profileImgUrl, email, totalLike 항목 추가
- *                         email 값 userName으로 변경
  */
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -90,9 +87,9 @@ public class KakaoUserService {
         // HTTP Body 생성
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
-        body.add("client_id", "2e4e71fc3d3078adc996df889a6eb71a"); // 리액트
-//        body.add("redirect_uri", "http://localhost:3000/user/kakao/callback"); // 리액트
-        body.add("redirect_uri", "https://neonaduri.com/user/kakao/callback"); // 리액트
+        body.add("client_id", ""); // 리액트
+//        body.add("redirect_uri", "http://localhost:3000/user/kakao/callback"); // 리액트 (local)
+        body.add("redirect_uri", "https://neonaduri.com/user/kakao/callback"); // 리액트 (서버 배포 후)
         body.add("code", code);
 
         // HTTP 요청 보내기
@@ -167,21 +164,6 @@ public class KakaoUserService {
 
             String nickName = kakaoUserInfo.getNickName();
 
-//            Optional<User> nickNameCheck = userRepository.findByNickName(nickName);
-//
-//            // 닉네임 중복 검사
-//            if (nickNameCheck.isPresent()) {
-//                String tempNickName = nickName;
-//                int i = 1;
-//                while (true){
-//                    nickName = tempNickName + "_" + i;
-//                    Optional<User> nickNameCheck2 = userRepository.findByNickName(nickName);
-//                    if (!nickNameCheck2.isPresent()) {
-//                        break;
-//                    }
-//                    i++;
-//                }
-//            }
             System.out.println("카카오 서비스에서 회원가입할 때 받는 닉네임" + nickName);
 
             // password: random UUID

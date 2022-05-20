@@ -52,7 +52,7 @@ public class PostController {
     public MyLikePagingDto showMyLike(@PathVariable("pageno") int pageno, @AuthenticationPrincipal UserDetailsImpl userDetails){
 
         //MyLikePostDto
-        Page<MyLikePostDto> postList=postService.showMyLike(pageno-1,userDetails);
+        Page<?> postList=postService.showMyLike(pageno-1,userDetails);
 
         //totalLike
         int totalLike=postService.getTotalLike(userDetails);
@@ -80,7 +80,7 @@ public class PostController {
                                            @AuthenticationPrincipal UserDetailsImpl userDetails){
 
         //BestAndLocationDto
-        Page<PlanResponseDto> postList=postService.showLocationPosts(location,pageno-1,userDetails);
+        Page<?> postList=postService.showLocationPosts(location,pageno-1,userDetails);
 
         //islastPage
         boolean islastPage=false;
@@ -169,7 +169,7 @@ public class PostController {
 
     //내가 작성한 플랜조회
     @GetMapping("/user/plans/{pageno}")
-    public PostResponseDto getMyPost(@PathVariable("pageno") int pageno,
+    public PlanPagingDto getMyPost(@PathVariable("pageno") int pageno,
                                 @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         Page<PostListDto> myplanList = postService.getMyPosts(pageno-1,userDetails);
@@ -178,7 +178,7 @@ public class PostController {
         if ( myplanList.getTotalPages() == myplanList.getNumber()+1){
             islastPage=true;
         }
-        PostResponseDto postList = new PostResponseDto(myplanList, islastPage);
+        PlanPagingDto postList = new PlanPagingDto(myplanList, islastPage);
         return postList;
     }
 

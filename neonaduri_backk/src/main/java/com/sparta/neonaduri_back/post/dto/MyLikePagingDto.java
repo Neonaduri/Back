@@ -15,11 +15,11 @@ import java.util.List;
 @Getter
 public class MyLikePagingDto {
     private int totalLike;
-    private List<MyLikePostDto> postList=new ArrayList<>();
+    private List<?> postList=new ArrayList<>();
     private int totalPage;
     private boolean islastPage;
 
-    public MyLikePagingDto(int totalLike, Page<MyLikePostDto> postDtoList
+    public MyLikePagingDto(int totalLike, Page<?> postDtoList
     , boolean islastPage) {
         this.totalLike=totalLike;
         this.postList= postDtoList.getContent();

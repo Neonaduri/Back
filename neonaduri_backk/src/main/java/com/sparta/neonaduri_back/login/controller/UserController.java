@@ -125,9 +125,12 @@ public class UserController {
     // 비밀번호 변경
      @PutMapping("/updatePassword")
      public ResponseEntity<Boolean> updatePassword(@RequestBody PasswordRequestDto passwordRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return ResponseEntity.ok(userService.updatePassword(passwordRequestDto, userDetails));}
+        return ResponseEntity.ok(userService.updatePassword(passwordRequestDto, userDetails));
+    }
 
-
-
-
+//    // 회원탈퇴
+//    @GetMapping("/withdrawal")
+//    public ResponseEntity<Boolean> withdrawal(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+//        return ResponseEntity.ok(userService.withdrawal(userDetails));
+//    }
 }
